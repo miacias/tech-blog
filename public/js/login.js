@@ -1,4 +1,4 @@
-// handles user login: check db, then reroute to home page
+// handles user login: add log in timestamp to db, then reroute to home page
 const login = async (event) => {
     event.preventDefault();
     const username = document.querySelector('#username-login').value.trim();
@@ -18,7 +18,7 @@ const login = async (event) => {
     }
 };
 
-// handles user sign up: add to db, then reroute to home page
+// handles user sign up: add user to db, then reroute to home page
 const signUp = async (event) => {
     event.preventDefault();
     const username = document.querySelector('#username-signup').value.trim();
