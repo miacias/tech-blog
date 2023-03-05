@@ -3,10 +3,5 @@
     <div>
         <button><a href="/new-post">Add New Blog Post</a></button>
     </div>
-    {{!-- for loop: posts each blog title by specific user with link to view blog --}}
-    {{#each userBlogs as |userBlog|}}
-        <a href="/{{userBlogs.username}}/{{userBlog.id}}">
-            <h2>{{userBlog.title}}</h2>
-        </a>
-    {{/each}}
+    {{preview}}
 </section>
