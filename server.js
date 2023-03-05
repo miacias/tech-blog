@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const path = require('path'); 
 const routes = require('./controllers');
 require('dotenv').config();
 
@@ -15,7 +16,7 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
+    db: sequelize // connects cookies to Sequelize
   })
 };
 
@@ -23,6 +24,7 @@ app.use(session(sess));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'))); // allows public folder relative path
 
 app.use(routes);
 
