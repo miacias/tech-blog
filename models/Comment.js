@@ -12,7 +12,7 @@ Comment.init(
       autoIncrement: true,
     },
     text_content: {
-      type: DataTypes.LONGTEXT,
+      type: DataTypes.TEXT,
     },
     date_created: {
       type: DataTypes.DATE,

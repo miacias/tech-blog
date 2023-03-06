@@ -41,7 +41,7 @@ User.init(
       },
     },
     sequelize,
-    timestamps: false,
+    timestamps: true, // updated at and created at values saved
     freezeTableName: true,
     underscored: true,
     modelName: 'user',
