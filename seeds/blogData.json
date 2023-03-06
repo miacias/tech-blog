@@ -1,0 +1,27 @@
+[
+    {
+        "title": "I don't even know",
+        "text_content": "Why are you here reading this?",
+        "user_id": 3
+    },
+    {
+        "title": "Ruby",
+        "text_content": "The best part of Ruby is I get to write interesting logic. You should too.",
+        "user_id": 3
+    },
+    {
+        "title": "U. Penn Coding Boot Camp",
+        "text_content": "For anyone interested in switching careers into tech, this boot camp is where it's at! The instructors are field experts, and there is a fleet of people to support you along the way.",
+        "user_id": 1
+    },
+    {
+        "title": "Don't give up!",
+        "text_content": "1) Block time into your weekly schedule to study, research, read, and watch videos. Try to work up to 20 hours each week.",
+        "user_id": 1
+    },
+    {
+        "title": "What are you lookin' at?",
+        "text_content": "It's a pun. Get it? Honestly, the best kind of coding is back-end because there is no need to worry about layout and colors.",
+        "user_id": 2
+    }
+]

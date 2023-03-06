@@ -16,7 +16,7 @@ Blog.init(
       allowNull: false,
     },
     text_content: {
-      type: DataTypes.LONGTEXT,
+      type: DataTypes.TEXT,
     },
     date_created: {
       type: DataTypes.DATE,
@@ -26,7 +26,7 @@ Blog.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
+        model: 'users',
         key: 'id',
       },
     },
@@ -34,7 +34,6 @@ Blog.init(
   {
     sequelize,
     timestamps: false,
-    freezeTableName: true,
     underscored: true,
     modelName: 'blog',
   }
