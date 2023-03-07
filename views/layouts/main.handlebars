@@ -13,6 +13,7 @@
     <nav>
         <button><a href="/">Home</a></button>
         {{#if loggedIn}}
+        {{!-- <button><a href="/{{username}}">My Dashboard</a></button> --}}
         <button id="logout">Log Out</button>
         {{else}}
         <button id="login"><a href="/login">Log In</a></button>
@@ -21,9 +22,9 @@
     <main>
         {{{body}}}
     </main>
+    <footer>Thank you for your contributions!</footer>
     {{#if loggedIn}}
     <script src="./js/logout.js"></script>
     {{/if}}
-    <footer>Thank you for your contributions!</footer>
 </body>
 </html>

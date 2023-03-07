@@ -53,7 +53,7 @@ router.get('/:username', async (req, res) => {
             loggedIn: req.session.loggedIn // sends session status (true/false)
         });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json(err);
     }
 });
