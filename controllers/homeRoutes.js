@@ -1,6 +1,33 @@
 const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
 
+// get home page with all blog posts
+router.get('/', async (req, res) => {
+    try {
+        const allBlogs = await User.findAll({
+            attributes: ['id', 'username'],
+            include: {
+                model: Blog,
+                attributes: ['title', 'date_created']
+            }
+        });
+        if (!allBlogs) {
+            res.status(404).json({ message: 'No blogs available!' });
+            return;
+        }
+        const home = allBlogs.map((blogs) => {
+            blogs.get({plain: true});
+        })
+        res.render('home', {
+            home,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+})
+
 // get dashboard for one user
 router.get('/:username', async (req, res) => {
     try {

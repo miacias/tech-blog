@@ -3,3 +3,18 @@
         <h2>{{blog.title}}</h2>
     </a>
 {{/each}} --}}
+<section>Hello</section>
+<section>
+    {{#with home}}
+        {{#each blogs}}
+        <div>
+            {{!-- each blog title links to a user's blog by ID --}}
+            <a href="{{../username}}/blogs/{{id}}"> 
+            <h2>{{title}}</h2>
+            </a>
+            <span>{{../username}}</span>
+            <span>posted on {{format_time date_created}}</span>
+        </div>
+        {{/each}}
+    {{/with}}
+</section>
