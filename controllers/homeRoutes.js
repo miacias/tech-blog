@@ -1,6 +1,35 @@
 const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
 
+// get home page with all blog posts
+router.get('/', async (req, res) => {
+    try {
+        const allBlogs = await Blog.findAll({
+            attributes: ['id', 'title', 'date_created'],
+            order: [['date_created', 'DESC']],
+            include: {
+                model: User,
+                attributes: ['id', 'username'],
+            }
+        });
+        if (!allBlogs) {
+            res.status(404).json({ message: 'No blogs available!' });
+            return;
+        };
+        // turns each data object into plain text
+        const home = allBlogs.map((blog) => {
+            return blog.get({ plain: true });
+        });
+        res.render('home', {
+            home,
+            loggedIn: req.session.loggedIn
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+})
+
 // get dashboard for one user
 router.get('/:username', async (req, res) => {
     try {
@@ -19,7 +48,7 @@ router.get('/:username', async (req, res) => {
         };
         // res.send(oneUser) // to test via Insomnia before Views are built
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
-        res.render('dashboard', { 
+        res.render('dashboard', {
             dashboard,
             loggedIn: req.session.loggedIn // sends session status (true/false)
         });
@@ -51,7 +80,7 @@ router.get('/:username/blogs/:id', async (req, res) => {
         // res.send(oneBlog); // to test via Insomnia before Views are built
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
         // console.log(blog)
-        res.render('blog', { 
+        res.render('blog', {
             blog,
             loggedIn: req.session.loggedIn // sends session status (true/false)
         });
