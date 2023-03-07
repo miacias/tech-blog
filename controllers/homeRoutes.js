@@ -39,7 +39,7 @@ router.get('/:username', async (req, res) => {
             include: // other model info included
             {
                 model: Blog,
-                attributes: ['title', 'date_created']
+                attributes: ['id', 'title', 'date_created']
             }
         });
         if (!oneUser) {
