@@ -1,3 +1,4 @@
+{{!-- first route User.findOne() --}}
 {{!-- displays edit/delete when user ID matches page --}}
 {{!-- {{#if userId}} --}}
 <section>
@@ -6,11 +7,21 @@
 </section>
 {{!-- {{/if}} --}}
 {{!-- displays one full blog --}}
-<section>
+{{!-- <section>
     <div class="blog-details">
         <h3>{{blog.blogs.[0].title}}</h3>
         <p>By: {{blog.username}}</p>
         <p>{{format_time blog.blogs.[0].date_created}}</p>
         <p>{{blog.blogs.[0].text_content}}</p>
+    </div>
+</section> --}}
+
+{{!-- alternate route Blog.findOne() --}}
+<section>
+    <div class="blog-details">
+        <h3>{{title}}</h3>
+        <p>By: {{blog.user.username}}</p>
+        <p>{{format_time blog.date_created}}</p>
+        <p>{{blog.text_content}}</p>
     </div>
 </section>
