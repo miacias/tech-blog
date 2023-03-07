@@ -4,20 +4,21 @@ const { User, Blog, Comment } = require('../models');
 // get home page with all blog posts
 router.get('/', async (req, res) => {
     try {
-        const allBlogs = await User.findAll({
-            attributes: ['id', 'username'],
+        const allBlogs = await Blog.findAll({
+            attributes: ['id', 'title', 'date_created'],
             include: {
-                model: Blog,
-                attributes: ['title', 'date_created']
+                model: User,
+                attributes: ['id', 'username'],
             }
         });
         if (!allBlogs) {
             res.status(404).json({ message: 'No blogs available!' });
             return;
-        }
-        const home = allBlogs.map((blogs) => {
-            blogs.get({plain: true});
-        })
+        };
+        // turns each data object into plain text
+        const home = allBlogs.map((blog) => {
+            return blog.get({ plain: true });
+        });
         res.render('home', {
             home,
             loggedIn: req.session.loggedIn
@@ -46,7 +47,7 @@ router.get('/:username', async (req, res) => {
         };
         // res.send(oneUser) // to test via Insomnia before Views are built
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
-        res.render('dashboard', { 
+        res.render('dashboard', {
             dashboard,
             loggedIn: req.session.loggedIn // sends session status (true/false)
         });
@@ -78,7 +79,7 @@ router.get('/:username/blogs/:id', async (req, res) => {
         // res.send(oneBlog); // to test via Insomnia before Views are built
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
         // console.log(blog)
-        res.render('blog', { 
+        res.render('blog', {
             blog,
             loggedIn: req.session.loggedIn // sends session status (true/false)
         });
