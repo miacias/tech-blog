@@ -1,8 +1,9 @@
 <section>
+    {{log blog}}
     <div class="blog-details">
-        <h3>{{user.blog.title}}</h3>
-        <p>Author: {{user.username}}</p>
-        <p>Published on: {{user.blog.date_created}}</p>
-        <p>{{user.blog.text_content}}</p>
+        <h3>{{blog.blogs.[0].title}}</h3>
+        <p>By: {{blog.username}}</p>
+        <p>{{format_time blog.blogs.[0].date_created}}</p>
+        <p>{{blog.blogs.[0].text_content}}</p>
     </div>
 </section>

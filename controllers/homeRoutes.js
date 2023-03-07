@@ -50,6 +50,7 @@ router.get('/:username/blogs/:id', async (req, res) => {
         };
         // res.send(oneBlog); // to test via Insomnia before Views are built
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
+        // console.log(blog)
         res.render('blog', { 
             blog,
             loggedIn: req.session.loggedIn // sends session status (true/false)
@@ -58,7 +59,7 @@ router.get('/:username/blogs/:id', async (req, res) => {
         console.error(err);
         res.status(500).json(err);
     }
-})
+});
 
 router.get('/login') // render login page
 
