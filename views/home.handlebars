@@ -1,18 +1,13 @@
-{{!-- {{#each blogs as |blog|}}
-    <a href="/{{blog.id}}">
-        <h2>{{blog.title}}</h2>
-    </a>
-{{/each}} --}}
-<h2>Top Posts</h2>
 <section>
-        <div>
-            {{!-- each blog title links to a user's blog by ID --}}
-            {{#each home}}
-            <a href="{{user.username}}/blogs/{{id}}"> 
-                <h3>{{title}}</h2>
-            </a>
-            <span>{{user.username}}</span>
-            <span>posted on {{format_time date_created}}</span>
-            {{/each}}
-        </div>
+    <h2>Top Posts</h2>
+    <div>
+        {{!-- each blog title links to a user's blog by ID --}}
+        {{#each home}}
+        <a href="{{user.username}}/blogs/{{id}}"> 
+            <h3>{{title}}</h2>
+        </a>
+        <span>{{user.username}}</span>
+        <span>posted on {{format_time date_created}}</span>
+        {{/each}}
+    </div>
 </section>
