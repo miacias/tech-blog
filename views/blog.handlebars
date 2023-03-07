@@ -1,5 +1,12 @@
+{{!-- displays edit/delete when user ID matches page --}}
+{{!-- {{#if userId}} --}}
 <section>
-    {{log blog}}
+    <button class="btn" id="edit-blog">Edit</button>
+    <button class="btn" id="delete-blog">Delete</button>
+</section>
+{{!-- {{/if}} --}}
+{{!-- displays one full blog --}}
+<section>
     <div class="blog-details">
         <h3>{{blog.blogs.[0].title}}</h3>
         <p>By: {{blog.username}}</p>
