@@ -3,11 +3,11 @@
     <div>
         <button><a href="/new-post">Add New Blog Post</a></button>
     </div>
+    {{!-- each blog title links to a user's blog by ID --}}
     {{#with dashboard}}
         {{#each blogs}}
         <div>
             <a href="{{../username}}/blogs/{{id}}"> 
-            {{!-- href must map to a route --}}
             <h2>{{title}}</h2>
             </a>
             <span>{{../username}}</span>
