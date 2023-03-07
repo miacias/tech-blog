@@ -3,5 +3,16 @@
     <div>
         <button><a href="/new-post">Add New Blog Post</a></button>
     </div>
-    {{preview}}
+    {{#with dashboard}}
+        {{#each blogs}}
+        <div>
+            <a href="{{../username}}/blogs/{{id}}"> 
+            {{!-- href must map to a route --}}
+            <h2>{{title}}</h2>
+            </a>
+            <span>{{../username}}</span>
+            <span>posted on {{format_time date_created}}</span>
+        </div>
+        {{/each}}
+    {{/with}}
 </section>
