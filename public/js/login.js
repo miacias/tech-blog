@@ -1,5 +1,5 @@
-const loginForm = document.querySelector('#login-btn');
-const signupForm = document.querySelector('#signup-btn');
+const loginForm = document.querySelector('#login-form');
+const signupForm = document.querySelector('#signup-form');
 
 // handles user login: add log in timestamp to db, then reroute to home page
 const login = async (event) => {
@@ -7,6 +7,7 @@ const login = async (event) => {
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
     // checks username with DB
+    console.log(username, password)
     if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'POST',
@@ -28,14 +29,15 @@ const signUp = async (event) => {
     const username = document.querySelector('#username-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
     // verifies fields were provided, then sends post route to back-end
-    // const newUser = {
-    //     username: username,
-    //     password: password
-    // };
+    const newUser = {
+        username: username,
+        password: password
+    };
+    console.log(newUser)
     if (username && password) {
-        const response = await fetch('/api/users/login', {
+        const response = await fetch('/api/users/signup', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify(newUser),
             // body: JSON.stringify(newUser),
             headers: { 'Content-Type': 'application/json'}
         });

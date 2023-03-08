@@ -2,23 +2,26 @@ const router = require('express').Router();
 const { User, Login } = require('../../models');
 
 // authenticate user login to store in session
-router.post('/login', async (req, res) => {
-    console.log('hello backend login')
+router.post('/users/login', async (req, res) => {
+    console.log('hello backend login', req.body)
     try {
         const userData = await User.findOne({
             where: {
                 username: req.body.username
             }
         });
+        console.log(userData)
         if (!userData) {
-            res.status(400).json({ message: 'Unauthorized access. Please check your username and password.' });
+            res.status(400).json({ message: 'no match. Unauthorized access. Please check your username and password.' });
             return;
         }
+        console.log('match passed')
         const passwordCheck = await userData.checkPassword(req.body.password);
         if (!passwordCheck) {
-            res.status(400).json({ message: 'Unauthorized access. Please check your username and password.' });
+            res.status(400).json({ message: 'wrong pass. Unauthorized access. Please check your username and password.' });
             return;
         }
+        console.log('password passed')
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userId = userData.id;
@@ -40,19 +43,21 @@ router.post('/login', async (req, res) => {
 });
 
 // saves new user to DB
-router.post('/signup', async (req, res) => {
-    console.log('hello signup backend')
+router.post('/users/signup', async (req, res) => {
+    console.log('hello signup backend', req.body);
     try {
         const newUser = await User.create({
             username: req.body.username,
             password: req.body.password
         });
-        const plainUser = newUser.get({plain: true});
-        console.log(plainUser)
+        // const plainUser = newUser.get({plain: true});
+        // console.log(plainUser)
+        console.log(newUser);
         req.session.save(() => {
-            req.session.user_id = userData.id;
+            req.session.user_id = newUser.id;
             req.session.logged_in = true;
-            res.status(201).json(plainUser);
+            console.log(req.session)
+            res.status(201).json(newUser);
         })
     } catch (err) {
         console.error(err);
