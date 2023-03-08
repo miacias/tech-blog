@@ -6,5 +6,13 @@ module.exports = {
             dateStyle: "medium"
         }).format(date);
         return timestamp;
+    },
+    // verifies if blogReader is the same person as blogAuthor
+    usernameMatch: (blogReader, blogAuthor) => {
+        if (blogReader === blogAuthor) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };

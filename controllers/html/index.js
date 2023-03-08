@@ -1,8 +1,21 @@
 const router = require('express').Router();
-const { User, Blog, Comment } = require('../models');
+const { User, Blog, Comment } = require('../../models');
+const withAuth = require('../../utils/auth.js');
+
+
+// renders login page for user to sign up or log in
+router.get('/login', (req, res) => {
+    // sends to home page if already connected
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    };
+    res.render('login');
+});
 
 // get home page with all blog posts
 router.get('/', async (req, res) => {
+    console.log("GET: home", req.session.user_id, req.session.logged_in)
     try {
         const allBlogs = await Blog.findAll({
             attributes: ['id', 'title', 'date_created'],
@@ -22,7 +35,9 @@ router.get('/', async (req, res) => {
         });
         res.render('home', {
             home,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.logged_in,
+            userId: req.session.user_id,
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -31,7 +46,7 @@ router.get('/', async (req, res) => {
 });
 
 // get dashboard with all blog posts from one user
-router.get('/:username', async (req, res) => {
+router.get('/:username', withAuth, async (req, res) => {
     try {
         const oneUser = await User.findOne({
             where: { username: req.params.username },
@@ -50,7 +65,9 @@ router.get('/:username', async (req, res) => {
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
         res.render('dashboard', {
             dashboard,
-            loggedIn: req.session.loggedIn // sends session status (true/false)
+            loggedIn: req.session.logged_in, // sends session status (true/false)
+            userId: req.session.user_id,
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -59,39 +76,8 @@ router.get('/:username', async (req, res) => {
 });
 
 // get one blog post from one user
-// router.get('/:username/blogs/:id', async (req, res) => {
-//     try {
-//         const oneBlog = await User.findOne({
-//             // https://stackoverflow.com/questions/38821389/sequelize-query-with-where-inside-include
-//             where: {
-//                 username: req.params.username,
-//                 '$blogs.id$': req.params.id
-//             },
-//             attributes: ['id', 'username'], // user info included
-//             include: { // blog info included
-//                 model: Blog,
-//                 attributes: ['id', 'title', 'text_content', 'date_created']
-//             }
-//         });
-//         if (!oneBlog) {
-//             res.status(404).json({ message: 'Not found!' });
-//             return;
-//         };
-//         // res.send(oneBlog); // to test via Insomnia before Views are built
-//         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
-//         console.log(blog)
-//         res.render('blog', {
-//             blog,
-//             loggedIn: req.session.loggedIn // sends session status (true/false)
-//         });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json(err);
-//     }
-// });
-
-// alternate attempt for getting a single blog by one user
-router.get('/:username/blogs/:id', async (req, res) => {
+router.get('/:username/blogs/:id', withAuth, async (req, res) => {
+    console.log("GET: one blog", req.session.user_id, req.session.logged_in)
     try {
         const oneBlog = await Blog.findOne({
             // https://stackoverflow.com/questions/38821389/sequelize-query-with-where-inside-include
@@ -103,6 +89,10 @@ router.get('/:username/blogs/:id', async (req, res) => {
             include: { 
                 model: User,
                 attributes: ['id', 'username'] // user info included
+            },
+            include: {
+                model: Comment,
+                attributes: []
             }
         });
         if (!oneBlog) {
@@ -113,7 +103,10 @@ router.get('/:username/blogs/:id', async (req, res) => {
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
         res.render('blog', {
             blog,
-            loggedIn: req.session.loggedIn // sends session status (true/false)
+            blogAuthor: blog.user.username,
+            loggedIn: req.session.logged_in, // sends session status (true/false)
+            userId: req.session.user_id,
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -121,9 +114,19 @@ router.get('/:username/blogs/:id', async (req, res) => {
     }
 });
 
-router.get('/login') // render login page
+// ends a user's session
+router.post('/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+        res.redirect('/');
+    } else {
+        res.status(404).end();
+    }
+});
 
-// it is possible to create a /api route to check which users
-// are currently logged in based on session id
+/* it is possible to create a /api route to check which users
+are currently logged in based on session id as an extra feature */
 
 module.exports = router;
