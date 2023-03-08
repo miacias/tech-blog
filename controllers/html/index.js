@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
 
 // get home page with all blog posts
 router.get('/', async (req, res) => {
-    console.log("GET: home",req.session.user_id, req.session.logged_in)
+    console.log("GET: home", req.session.user_id, req.session.logged_in)
     try {
         const allBlogs = await Blog.findAll({
             attributes: ['id', 'title', 'date_created'],
@@ -35,7 +35,9 @@ router.get('/', async (req, res) => {
         });
         res.render('home', {
             home,
-            loggedIn: req.session.logged_in
+            loggedIn: req.session.logged_in,
+            userId: req.session.user_id,
+            username: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -63,7 +65,9 @@ router.get('/:username', withAuth, async (req, res) => {
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
         res.render('dashboard', {
             dashboard,
-            loggedIn: req.session.logged_in // sends session status (true/false)
+            loggedIn: req.session.logged_in, // sends session status (true/false)
+            userId: req.session.user_id,
+            username: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -73,6 +77,7 @@ router.get('/:username', withAuth, async (req, res) => {
 
 // get one blog post from one user
 router.get('/:username/blogs/:id', withAuth, async (req, res) => {
+    console.log("GET: one blog", req.session.user_id, req.session.logged_in)
     try {
         const oneBlog = await Blog.findOne({
             // https://stackoverflow.com/questions/38821389/sequelize-query-with-where-inside-include
@@ -94,7 +99,10 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
         res.render('blog', {
             blog,
-            loggedIn: req.session.logged_in // sends session status (true/false)
+            blogAuthor: blog.user.username,
+            loggedIn: req.session.logged_in, // sends session status (true/false)
+            userId: req.session.user_id,
+            username: req.session.username
         });
     } catch (err) {
         console.error(err);

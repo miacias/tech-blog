@@ -6,5 +6,12 @@ module.exports = {
             dateStyle: "medium"
         }).format(date);
         return timestamp;
+    },
+    usernameMatch: (username, blogAuthor) => {
+        if (username === blogAuthor) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };
