@@ -16,15 +16,17 @@
     </div>
 </section>
 <section class="comments">
-    {{!-- NEED TO ADD COMMENTS SECTION --}}
-    {{!-- 1. ADJUST ROUTES TO INCLUDE COMMENTS --}}
-    {{!-- 2. LOG BLOG WITH HANDLEBARS --}}
-    {{!-- 3. EXTRACT COMMENT DATA VIA HANDLEBARS TO VIEW --}}
-    {{!-- {{#each}} --}}
     <h4>Comments!</h4>
+    {{#if blog.comments.length}}
+    {{#each blog.comments}}
     <div>
-        <p id="comment-username">{{blog.comments.[0].user.username}}</p>
-        <p id="comment-text">{{blog.comments.[0].text_content}}</p>
+        <p id="comment-username">{{user.username}}</p>
+        <p id="comment-text">{{text_content}}</p>
     </div>
-    {{!-- {{/each}} --}}
+    {{/each}}
+    {{else}}
+    <div>
+        <p>Consider adding the first comment!</p>
+    </div>
+    {{/if}}
 </section>
