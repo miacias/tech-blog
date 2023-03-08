@@ -6,8 +6,7 @@ const login = async (event) => {
     event.preventDefault();
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
-    // checks username with DB
-    console.log(username, password)
+    // sends user data to back-end routes
     if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'POST',
@@ -33,7 +32,7 @@ const signUp = async (event) => {
         username: username,
         password: password
     };
-    console.log(newUser)
+    // sends user data to back-end routes
     if (username && password) {
         const response = await fetch('/api/users/signup', {
             method: 'POST',

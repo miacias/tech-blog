@@ -4,6 +4,7 @@ const withAuth = require('../../utils/auth.js');
 
 // get home page with all blog posts
 router.get('/', async (req, res) => {
+    console.log(req.session)
     try {
         const allBlogs = await Blog.findAll({
             attributes: ['id', 'title', 'date_created'],
