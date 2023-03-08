@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Login } = require('../../models');
+const { User, Blog, Login } = require('../../models');
 
 // authenticate user login to store in session
 router.post('/users/login', async (req, res) => {
@@ -59,5 +59,22 @@ router.post('/users/signup', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+// creates a new blog
+router.post('/blogs', async (req, res) => {
+    try {
+        const newBlog = await Blog.create({
+            title: req.body.blogTitle,
+            text_content: req.body.blogText,
+            user_id: req.session.user_id
+        });
+        if ( newBlog.title && newBlog.text_content && newBlog.user_id) {
+            res.status(201).json(newBlog);
+        };
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;

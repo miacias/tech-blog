@@ -1,9 +1,20 @@
 <section>
-    {{!-- button links to new blog post page --}}
-    <div>
-        <button><a href="/new-post">Add New Blog Post</a></button>
-    </div>
-    {{!-- {{#if dashboard.length}} --}}
+    <form class="new-blog-form">
+        <div>
+            <label for="new-blog-title">Title:</label>
+            <input class="new-blog" type="text" id="new-blog-title">
+        </div>
+        <div>
+            <label for="new-blog-text">Post:</label>
+            <input class="new-blog" type="text" id="new-blog-text">
+        </div>
+        <div>
+            <button class="btn" type="submit" id="new-blog">Post New Blog!</button>
+        </div>
+    </form>
+</section>
+<section>
+    {{#if dashboard.blogs.length}}
     <h2>Blog Posts by {{dashboard.username}}</h2>
     {{!-- each blog title links to a user's blog by ID --}}
     {{#with dashboard}}
@@ -16,7 +27,8 @@
         </div>
         {{/each}}
     {{/with}}
-    {{!-- {{else}}
+    {{else}}
     <h2>Consider adding your first post!</h2>
-    {{/if}} --}}
+    {{/if}}
 </section>
+<script src="./js/blogManager.js"></script>
