@@ -23,21 +23,22 @@
         <button class="btn" id="add-comment">Add a Comment</button>
     </div>
     {{#if blog.comments.length}}
-    {{#each blog.comments}}
-    <div>
-        <span id="comment-username">By: {{user.username}}</span>
-        <span id="comment-date">on {{format_time date_created}}</span>
-        <p id="comment-text">{{text_content}}</p>
-        {{!-- IF not working as expected: reads the first value then applies first value to each comment --}}
-        <p>match? {{commentMatch ../blogReader ../commentAuthor}}</p>
-        {{!-- {{#if (commentMatch ../blogReader ../commentAuthor)}}
+        {{#each blog.comments}}
+        {{log this}}
         <div>
-            <button class="btn" id="edit-comment">Edit Comment</button>
-            <button class="btn" id="delete-comment">Delete Comment</button>
+            <span id="comment-username">By: {{user.username}}</span>
+            <span id="comment-date">on {{format_time date_created}}</span>
+            <p id="comment-text">{{text_content}}</p>
+            {{!-- IF not working as expected: reads the first value then applies first value to each comment --}}
+            <p>match? {{commentMatch ../blogReader user.username}}</p>
+            {{#if (commentMatch ../blogReader user.username)}}
+            <div>
+                <button class="btn" id="edit-comment">Edit Comment</button>
+                <button class="btn" id="delete-comment">Delete Comment</button>
+            </div>
+            {{/if}}
         </div>
-        {{/if}} --}}
-    </div>
-    {{/each}}
+        {{/each}}
     {{else}}
     <div>
         <p>Consider adding the first comment!</p>
