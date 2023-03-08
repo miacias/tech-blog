@@ -1,18 +1,10 @@
-{{!-- first route User.findOne() --}}
-{{!-- displays edit/delete when user ID matches page --}}
-{{!-- {{#if userId === blog.user.id}} --}}
-{{!-- {{log blog}} --}}
-{{!-- {{log username}}
-{{log blogAuthor}} --}}
-{{!-- {{log loggedIn}} --}}
-{{!-- {{log userId}} --}}
-<p>true or false?{{usernameMatch username}}</p>
-
+{{!-- displays edit/delete when username matches page author --}}
+{{#if (usernameMatch blogReader blogAuthor)}}
 <section>
     <button class="btn" id="edit-blog">Edit</button>
     <button class="btn" id="delete-blog">Delete</button>
 </section>
-{{!-- {{/if}} --}}
+{{/if}}
 {{!-- displays one full blog --}}
 <section class="blog-post">
     <div class="blog-details">

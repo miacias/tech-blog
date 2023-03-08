@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
             home,
             loggedIn: req.session.logged_in,
             userId: req.session.user_id,
-            username: req.session.username
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -67,7 +67,7 @@ router.get('/:username', withAuth, async (req, res) => {
             dashboard,
             loggedIn: req.session.logged_in, // sends session status (true/false)
             userId: req.session.user_id,
-            username: req.session.username
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);
@@ -89,6 +89,10 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
             include: { 
                 model: User,
                 attributes: ['id', 'username'] // user info included
+            },
+            include: {
+                model: Comment,
+                attributes: []
             }
         });
         if (!oneBlog) {
@@ -102,7 +106,7 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
             blogAuthor: blog.user.username,
             loggedIn: req.session.logged_in, // sends session status (true/false)
             userId: req.session.user_id,
-            username: req.session.username
+            blogReader: req.session.username
         });
     } catch (err) {
         console.error(err);

@@ -7,8 +7,9 @@ module.exports = {
         }).format(date);
         return timestamp;
     },
-    usernameMatch: (username, blogAuthor) => {
-        if (username === blogAuthor) {
+    // verifies if blogReader is the same person as blogAuthor
+    usernameMatch: (blogReader, blogAuthor) => {
+        if (blogReader === blogAuthor) {
             return true;
         } else {
             return false;
