@@ -17,11 +17,19 @@
 </section> --}}
 
 {{!-- alternate route Blog.findOne() --}}
-<section>
+<section class="blog-post">
     <div class="blog-details">
         <h3>{{title}}</h3>
         <p>By: {{blog.user.username}}</p>
         <p>{{format_time blog.date_created}}</p>
         <p>{{blog.text_content}}</p>
     </div>
+</section>
+<section class="comments">
+    {{#each}}
+    <div>
+        <p id="comment-username"></p>
+        <p id="comment-text"></p>
+    </div>
+    {{/each}}
 </section>

@@ -32,3 +32,5 @@ Login.init(
       modelName: 'login',
     }
 )
+
+module.exports = Login;

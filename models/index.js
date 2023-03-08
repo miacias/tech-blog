@@ -1,6 +1,7 @@
 const User = require('./User.js');
 const Blog = require('./Blog.js');
 const Comment = require('./Comment.js');
+const Login = require('./Login.js');
 
 // one to many - User:Blog
 User.hasMany(Blog, {
@@ -22,4 +23,14 @@ Comment.belongsTo(Blog, {
   foreignKey: 'blog_id'
 });
 
-module.exports = { User, Blog, Comment };
+// one to many - User:Login History
+User.hasMany(Login, {
+  foreignKey: 'user_id'
+});
+
+Login.belongsTo(User, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
+
+module.exports = { User, Blog, Comment, Login };
