@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
+const withAuth = require('../utils/auth.js');
 
 // get home page with all blog posts
 router.get('/', async (req, res) => {
@@ -30,8 +31,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+// gets login page for user to sign up or log in
+router.get('/login', (req, res) => {
+    // sends to home page if already connected
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    };
+    res.render('login');
+});
+
 // get dashboard with all blog posts from one user
-router.get('/:username', async (req, res) => {
+router.get('/:username', withAuth, async (req, res) => {
     try {
         const oneUser = await User.findOne({
             where: { username: req.params.username },
@@ -91,7 +102,7 @@ router.get('/:username', async (req, res) => {
 // });
 
 // alternate attempt for getting a single blog by one user
-router.get('/:username/blogs/:id', async (req, res) => {
+router.get('/:username/blogs/:id', withAuth, async (req, res) => {
     try {
         const oneBlog = await Blog.findOne({
             // https://stackoverflow.com/questions/38821389/sequelize-query-with-where-inside-include
@@ -123,7 +134,7 @@ router.get('/:username/blogs/:id', async (req, res) => {
 
 router.get('/login') // render login page
 
-// it is possible to create a /api route to check which users
-// are currently logged in based on session id
+/* it is possible to create a /api route to check which users
+are currently logged in based on session id */
 
 module.exports = router;
