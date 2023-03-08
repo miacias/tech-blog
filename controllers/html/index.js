@@ -82,19 +82,26 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
         const oneBlog = await Blog.findOne({
             // https://stackoverflow.com/questions/38821389/sequelize-query-with-where-inside-include
             where: {
-                '$username$': req.params.username,
+                '$user.username$': req.params.username,
                 id: req.params.id
             },
             attributes: ['id', 'title', 'text_content', 'date_created'], // blog info included
-            include: { 
-                model: User,
-                attributes: ['id', 'username'] // user info included
-            },
-            include: {
-                model: Comment,
-                attributes: []
-            }
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username'] // user info included
+                },
+                {
+                    model: Comment,
+                    attributes: ['text_content', 'user_id', 'date_created'], // comment info included
+                    include: {
+                        model: User,
+                        attributes: ['id', 'username']
+                    }
+                }
+            ]
         });
+        // console.log(oneBlog);
         if (!oneBlog) {
             res.status(404).json({ message: 'Not found!' });
             return;

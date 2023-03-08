@@ -1,3 +1,4 @@
+{{log blog}}
 {{!-- displays edit/delete when username matches page author --}}
 {{#if (usernameMatch blogReader blogAuthor)}}
 <section>
@@ -20,9 +21,10 @@
     {{!-- 2. LOG BLOG WITH HANDLEBARS --}}
     {{!-- 3. EXTRACT COMMENT DATA VIA HANDLEBARS TO VIEW --}}
     {{!-- {{#each}} --}}
+    <h4>Comments!</h4>
     <div>
-        <p id="comment-username"></p>
-        <p id="comment-text"></p>
+        <p id="comment-username">{{blog.comments.[0].user.username}}</p>
+        <p id="comment-text">{{blog.comments.[0].text_content}}</p>
     </div>
     {{!-- {{/each}} --}}
 </section>
