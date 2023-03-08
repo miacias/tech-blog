@@ -2,9 +2,20 @@ const router = require('express').Router();
 const { User, Blog, Comment } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
+
+// renders login page for user to sign up or log in
+router.get('/login', (req, res) => {
+    // sends to home page if already connected
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    };
+    res.render('login');
+});
+
 // get home page with all blog posts
 router.get('/', async (req, res) => {
-    console.log(req.session)
+    console.log("GET: home",req.session.user_id, req.session.logged_in)
     try {
         const allBlogs = await Blog.findAll({
             attributes: ['id', 'title', 'date_created'],
@@ -24,22 +35,12 @@ router.get('/', async (req, res) => {
         });
         res.render('home', {
             home,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.logged_in
         });
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
     }
-});
-
-// renders login page for user to sign up or log in
-router.get('/login', (req, res) => {
-    // sends to home page if already connected
-    if (req.session.logged_in) {
-        res.redirect('/');
-        return;
-    };
-    res.render('login');
 });
 
 // get dashboard with all blog posts from one user
@@ -62,7 +63,7 @@ router.get('/:username', withAuth, async (req, res) => {
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
         res.render('dashboard', {
             dashboard,
-            loggedIn: req.session.loggedIn // sends session status (true/false)
+            loggedIn: req.session.logged_in // sends session status (true/false)
         });
     } catch (err) {
         console.error(err);
@@ -93,7 +94,7 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
         res.render('blog', {
             blog,
-            loggedIn: req.session.loggedIn // sends session status (true/false)
+            loggedIn: req.session.logged_in // sends session status (true/false)
         });
     } catch (err) {
         console.error(err);
@@ -103,7 +104,7 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
 
 // ends a user's session
 router.post('/logout', (req, res) => {
-    if (req.session.loggedIn) {
+    if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
         });

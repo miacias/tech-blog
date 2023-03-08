@@ -10,17 +10,19 @@ router.post('/users/login', async (req, res) => {
             }
         });
         if (!userData) {
-            res.status(400).json({ message: 'no match. Unauthorized access. Please check your username and password.' });
+            res.status(400).json({ message: 'Unauthorized access. Please check your username and password.' });
             return;
         }
         const passwordCheck = await userData.checkPassword(req.body.password);
         if (!passwordCheck) {
-            res.status(400).json({ message: 'wrong pass. Unauthorized access. Please check your username and password.' });
+            res.status(400).json({ message: 'Unauthorized access. Please check your username and password.' });
             return;
         }
         req.session.save(() => {
-            req.session.loggedIn = true;
-            req.session.userId = userData.id;
+            req.session.logged_in = true;
+            req.session.user_id = userData.id;
+            req.session.username = userData.username;
+            console.log("POST: login", req.session.user_id, req.session.logged_in)
             res.status(201).json(userData); // .save is async so info must be sent here
             //const loginHisory = await Login.create() save login timestamp to database
             // try {
@@ -40,7 +42,6 @@ router.post('/users/login', async (req, res) => {
 
 // saves new user to DB
 router.post('/users/signup', async (req, res) => {
-    console.log('hello signup backend', req.body);
     try {
         const newUser = await User.create({
             username: req.body.username,
@@ -48,8 +49,9 @@ router.post('/users/signup', async (req, res) => {
         });
         req.session.save(() => {
             req.session.user_id = newUser.id;
+            req.session.username = newUser.username;
             req.session.logged_in = true;
-            console.log(req.session)
+            console.log("POST: signup", req.session.user_id, req.session.logged_in)
             res.status(201).json(newUser);
         })
     } catch (err) {
