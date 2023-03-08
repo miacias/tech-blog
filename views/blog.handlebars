@@ -1,6 +1,7 @@
-{{log blog}}
 {{!-- displays edit/delete when username matches page author --}}
-{{#if (usernameMatch blogReader blogAuthor)}}
+{{!-- {{log commentAuthor}}
+{{log blogReader}} --}}
+{{#if (blogMatch blogReader blogAuthor)}}
 <section>
     <button class="btn" id="edit-blog">Edit</button>
     <button class="btn" id="delete-blog">Delete</button>
@@ -15,13 +16,26 @@
         <p>{{blog.text_content}}</p>
     </div>
 </section>
+{{!-- displays all comments for this post --}}
 <section class="comments">
     <h4>Comments!</h4>
+    <div>
+        <button class="btn" id="add-comment">Add a Comment</button>
+    </div>
     {{#if blog.comments.length}}
     {{#each blog.comments}}
     <div>
-        <p id="comment-username">{{user.username}}</p>
+        <span id="comment-username">By: {{user.username}}</span>
+        <span id="comment-date">on {{format_time date_created}}</span>
         <p id="comment-text">{{text_content}}</p>
+        {{!-- IF not working as expected: reads the first value then applies first value to each comment --}}
+        <p>match? {{commentMatch ../blogReader ../commentAuthor}}</p>
+        {{!-- {{#if (commentMatch ../blogReader ../commentAuthor)}}
+        <div>
+            <button class="btn" id="edit-comment">Edit Comment</button>
+            <button class="btn" id="delete-comment">Delete Comment</button>
+        </div>
+        {{/if}} --}}
     </div>
     {{/each}}
     {{else}}

@@ -8,8 +8,17 @@ module.exports = {
         return timestamp;
     },
     // verifies if blogReader is the same person as blogAuthor
-    usernameMatch: (blogReader, blogAuthor) => {
+    blogMatch: (blogReader, blogAuthor) => {
+        // console.log(blogReader, blogAuthor)
         if (blogReader === blogAuthor) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    commentMatch: (blogReader, commentAuthor) => {
+        console.log(blogReader, commentAuthor)
+        if (blogReader === commentAuthor) {
             return true;
         } else {
             return false;

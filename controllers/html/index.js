@@ -113,7 +113,8 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
             blogAuthor: blog.user.username,
             loggedIn: req.session.logged_in, // sends session status (true/false)
             userId: req.session.user_id,
-            blogReader: req.session.username
+            blogReader: req.session.username,
+            commentAuthor: blog.comments.length !== 0 ? blog.comments[0].user.username : null
         });
     } catch (err) {
         console.error(err);
