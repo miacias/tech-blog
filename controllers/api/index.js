@@ -99,7 +99,6 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
                 user_id: req.session.user_id
             }
         });
-        console.log(blogData)
         if (!blogData) {
             res.status(404).json({ message: 'Not found!' })
             return;
