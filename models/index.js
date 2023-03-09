@@ -23,6 +23,18 @@ Comment.belongsTo(Blog, {
   foreignKey: 'blog_id'
 });
 
+// one to many - User: Comment
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
+
+Comment.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+// ----- EXTRA FEATURE (incomplete) -----
+
 // one to many - User:Login History
 User.hasMany(Login, {
   foreignKey: 'user_id'
