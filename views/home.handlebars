@@ -3,6 +3,7 @@
     <div>
         {{!-- each blog title links to a user's blog by ID --}}
         {{#each home}}
+        <hr class="dotted">
         <a href="{{user.username}}/blogs/{{id}}"> 
             <h3>{{title}}</h2>
         </a>

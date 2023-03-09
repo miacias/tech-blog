@@ -14,7 +14,10 @@
     </form>
 </section>
 <section>
-    {{#if dashboard.blogs.length}}
+    {{#if !dashboard.blogs.length}}
+    <h2>Consider adding your first post!</h2>
+    {{else}}
+    {{!-- {{#if dashboard.blogs.length}} --}}
     <h2>Blog Posts by {{dashboard.username}}</h2>
     {{!-- each blog title links to a user's blog by ID --}}
     {{#with dashboard}}
@@ -27,8 +30,8 @@
         </div>
         {{/each}}
     {{/with}}
-    {{else}}
-    <h2>Consider adding your first post!</h2>
+    {{!-- {{else}}
+    <h2>Consider adding your first post!</h2> --}}
     {{/if}}
 </section>
 <script src="./js/blogManager.js"></script>

@@ -1,0 +1,56 @@
+:root {
+    /* Horizontal Blues palette by shellybean86 https://www.colourlovers.com/palette/4901956/Horizontal_Blues */
+    --class-one-blue: #254375;
+    --blue-jay: #265485;
+    --antique-flair: #306295;
+    --sky-mountain: #4A7AA2;
+    --vinyl-floor: #869FB5;
+}
+
+body {
+    background-color: var(--sky-mountain);
+    color: whitesmoke;
+}
+
+header,
+header p,
+footer {
+    text-align: center;
+    background-color: var(--class-one-blue);
+    color: var(--vinyl-floor);
+}
+
+nav {
+    background-color: var(--blue-jay);
+}
+
+.btn {
+    background-color: wheat;
+    color: var(--sky-mountain);
+    border: 0;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+/* .btn a:link,
+.btn a:visited,
+.btn a:hover,
+.btn a:active {
+    text-decoration: none;
+} */
+
+h3 {
+    color: var(--class-one-blue);
+}
+
+p {
+    color: wheat;
+}
+
+hr {
+    border: 1px dashed #bbb;
+}

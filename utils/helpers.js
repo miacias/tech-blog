@@ -23,5 +23,12 @@ module.exports = {
         } else {
             return false;
         }
+    },
+    addCommentMatch: (blogReader, blogAuthor) => {
+        if (blogReader !== blogAuthor) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };
