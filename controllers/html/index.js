@@ -121,18 +121,6 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
     }
 });
 
-// ends a user's session
-router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-        res.redirect('/');
-    } else {
-        res.status(404).end();
-    }
-});
-
 /* it is possible to create a /api route to check which users
 are currently logged in based on session id as an extra feature */
 

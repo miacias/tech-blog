@@ -60,6 +60,18 @@ router.post('/users/signup', async (req, res) => {
     }
 });
 
+// ends a user's session
+router.post('/users/logout', (req, res) => {
+    if (req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+        res.redirect('/');
+    } else {
+        res.status(404).end();
+    }
+});
+
 // creates a new blog
 router.post('/blogs', async (req, res) => {
     try {
@@ -75,6 +87,6 @@ router.post('/blogs', async (req, res) => {
         console.error(err);
         res.status(500).json(err);
     }
-})
+});
 
 module.exports = router;
