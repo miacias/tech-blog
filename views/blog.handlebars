@@ -6,10 +6,10 @@
 </section>
 {{/if}}
 {{!-- displays one full blog --}}
-<section class="blog-post">
+<section class="blog-post" id="{{blog.id}}">
     <div class="blog-details">
         <h3>{{blog.title}}</h3>
-        <p>By: {{blog.user.username}}</p>
+        <p class="user" id="{{blog.user.username}}">By: {{blog.user.username}}</p>
         <p>{{format_time blog.date_created}}</p>
         <p>{{blog.text_content}}</p>
     </div>
@@ -49,3 +49,4 @@
     </div>
     {{/if}}
 </section>
+<script src="/js/editDeleteBlog.js"></script>

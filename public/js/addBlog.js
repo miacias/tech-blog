@@ -1,4 +1,4 @@
-const addBlog = document.querySelector('.new-blog-form');
+const addBlogBtn = document.querySelector('.new-blog-form');
 
 const saveNewBlog = async (event) => {
     event.preventDefault();
@@ -10,15 +10,12 @@ const saveNewBlog = async (event) => {
             body: JSON.stringify({ blogTitle, blogText }),
             headers: { 'Content-Type': 'application/json' }
         });
-        console.log(response)
-        console.log('past the response')
         if (response.ok) {
             document.location.reload();
         } else {
             alert('Failed to create new post. Please try again.')
         }
     }
-}
+};
 
-
-addBlog.addEventListener('submit', saveNewBlog);
+addBlogBtn.addEventListener('submit', saveNewBlog);

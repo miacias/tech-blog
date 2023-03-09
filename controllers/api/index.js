@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Blog, Login } = require('../../models');
+const withAuth = require('../../utils/auth.js');
 
 // authenticate user login to store in session
 router.post('/users/login', async (req, res) => {
@@ -83,6 +84,27 @@ router.post('/blogs', async (req, res) => {
         if ( newBlog.title && newBlog.text_content && newBlog.user_id) {
             res.status(201).json(newBlog);
         };
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
+// deletes a blog
+router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id
+            }
+        });
+        console.log(blogData)
+        if (!blogData) {
+            res.status(404).json({ message: 'Not found!' })
+            return;
+        }
+        res.status(200).json(blogData);
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
