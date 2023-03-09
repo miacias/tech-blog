@@ -1,6 +1,4 @@
 {{!-- displays edit/delete when username matches page author --}}
-{{!-- {{log commentAuthor}}
-{{log blogReader}} --}}
 {{#if (blogMatch blogReader blogAuthor)}}
 <section>
     <button class="btn" id="edit-blog">Edit</button>
@@ -19,17 +17,13 @@
 {{!-- displays all comments for this post --}}
 <section class="comments">
     <h4>Comments!</h4>
-    {{!-- <div>
-        <button class="btn" id="add-comment">Add a Comment</button>
-    </div> --}}
     {{#if blog.comments.length}}
         {{#each blog.comments}}
-        {{log this}}
+        <hr class="dotted">
         <div>
             <span id="comment-username">By: {{user.username}}</span>
             <span id="comment-date">on {{format_time date_created}}</span>
             <p id="comment-text">{{text_content}}</p>
-            {{!-- IF not working as expected: reads the first value then applies first value to each comment --}}
             {{#if (commentMatch ../blogReader user.username)}}
             <div>
                 <button class="btn" id="edit-comment">Edit Comment</button>
@@ -49,7 +43,7 @@
             <div>
                 <label>Comment:</label>
                 <input class="new-comment" type="text">
-                <button class="btn" id="comment-reply">Reply</button>
+                <button class="btn" id="add-comment">Reply</button>
             </div>
         </form>
     </div>
