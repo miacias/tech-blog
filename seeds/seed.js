@@ -19,14 +19,19 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
-  // seeds comments randomly (on a random blog by a random user)
-  for (const comment of commentData) {
-    await Comment.create({
-      ...comment,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
-      blog_id: blogs[Math.floor(Math.random() * blogs.length)].id,
-    });
-  };
+  // seeds blogs
+  const comments = await Comment.bulkCreate(commentData, {
+    individualHooks: true,
+    returning: true,
+  });
+  // // seeds comments randomly (on a random blog by a random user)
+  // for (const comment of commentData) {
+  //   await Comment.create({
+  //     ...comment,
+  //     user_id: users[Math.floor(Math.random() * users.length)].id,
+  //     blog_id: blogs[Math.floor(Math.random() * blogs.length)].id,
+  //   });
+  // };
   // ends MySQL connection
   process.exit(0);
 };

@@ -17,7 +17,7 @@ module.exports = {
     },
     // if reader is comment author, can edit/delete comments
     commentMatch: (blogReader, commentAuthor) => {
-        console.log(blogReader, commentAuthor)
+        // console.log(blogReader, commentAuthor)
         if (blogReader === commentAuthor) {
             return true;
         } else {
@@ -39,5 +39,27 @@ module.exports = {
         } else {
             return true;
         }
-    }
+    },
+    // if no comments or no matching commentAuthor, hide JS file
+    hasNoComments: (commentLength, blogReader, commentsList) => {
+        // if no comments, hide JS file
+        if (!commentLength) {
+            return false;
+        } else {
+            // if one of the comments is written by current reader, show JS file
+            const pass = commentsList.map((comment) => {
+                const username = comment.user.username;
+                if (username === blogReader) {
+                    return true;
+                }
+                return false;
+            })
+            if (pass) {
+                return true;
+            } else {
+                // if no match, hide JS file
+                return false;
+            }
+        }
+    },
 };
