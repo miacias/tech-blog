@@ -1,17 +1,27 @@
 [
     {
-        "text_content": "I never really thought of that."
+        "text_content": "I never really thought of that.",
+        "blog_id": 2,
+        "user_id": 1
     },
     {
-        "text_content": "We just learned about that recently in the coding boot camp. Nice."
+        "text_content": "We just learned about that recently in the coding boot camp. Nice.",
+        "blog_id": 5,
+        "user_id": 2
     },
     {
-        "text_content": "It doesn't really seem like you know what you're talking about."
+        "text_content": "It doesn't really seem like you know what you're talking about.",
+        "blog_id": 4,
+        "user_id": 2
     },
     {
-        "text_content": "I love this! Add me on LinkedIn!"
+        "text_content": "I love this! Add me on LinkedIn!",
+        "blog_id": 3,
+        "user_id": 3
     },
     {
-        "text_content": "Not everyone agrees on everything, but I'm pretty sure we can all agree this is relatable LOL"
+        "text_content": "Not everyone agrees on everything, but I'm pretty sure we can all agree this is relatable LOL",
+        "blog_id": 4,
+        "user_id": 1
     }
 ]
