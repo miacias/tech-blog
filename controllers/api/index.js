@@ -110,4 +110,24 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
     }
 });
 
+// deletes a comment
+router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
+    try {
+        const commentData = await Comment.destroy({
+            where: {
+                blog_id: req.params.id,
+                user_id: req.session.user_id
+            }
+        });
+        if (!commentData) {
+            res.status(400).json({message: 'Not found!'});
+            return;
+        }
+        res.status(200).json(commentData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

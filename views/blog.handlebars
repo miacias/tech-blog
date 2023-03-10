@@ -17,12 +17,11 @@
 {{!-- displays all comments for this post --}}
 <section class="comments">
     <h4>Comments!</h4>
-    {{!-- {{log blog}} --}}
     {{#if blog.comments.length}}
         {{#each blog.comments}}
         <hr class="dotted">
         <div class="comment-post" id="{{user_id}}">
-            <span class="comment-username">By: {{user.username}}</span>
+            <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
             <span id="comment-date">on {{format_time date_created}}</span>
             <p id="comment-text">{{text_content}}</p>
             {{#if (commentMatch ../blogReader user.username)}}

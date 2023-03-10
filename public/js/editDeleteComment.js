@@ -8,8 +8,8 @@ const deleteMyComment = async (event) => {
     const areYouSure = confirm('Are you sure you want to delete this comment?');
     if (areYouSure) {
         const commentId = document.querySelector('.comment-post').id;
-        const username = document.querySelector('.user').id;
-        const response = await fetch(`/api/${username}/blogs/${blogId}`, {
+        const username = document.querySelector('.comment-username').id;
+        const response = await fetch(`/api/${username}/blogs/${commentId}`, {
             method: 'DELETE',
             headers: { 'content-type': 'application/json'}
         });
