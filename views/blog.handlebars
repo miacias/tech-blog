@@ -50,6 +50,9 @@
     </div>
     {{/if}}
 </section>
+{{#if (blogMatch blogReader blogAuthor)}}
+<script src="/js/editDeleteBlog.js"></script>
+{{/if}}
 {{#if  (hasNoComments blog.comments.length blogReader blog.comments)}}
-<script src="/js/editDelete.js"></script>
+<script src="/js/editDeleteComment.js"></script>
 {{/if}}
