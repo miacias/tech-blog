@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Blog, Login } = require('../../models');
+const { User, Blog, Comment, Login } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
 // authenticate user login to store in session
@@ -111,12 +111,13 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
 });
 
 // deletes a comment
-router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
+router.delete('/:username/blogs/:id/comments/:comment_id', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.destroy({
             where: {
+                user_id: req.session.user_id,
                 blog_id: req.params.id,
-                user_id: req.session.user_id
+                id: req.params.id
             }
         });
         if (!commentData) {
