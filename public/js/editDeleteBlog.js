@@ -14,7 +14,8 @@ const deleteMyBlog = async (event) => {
             headers: { 'content-type': 'application/json'}
         });
         if (response.ok) {
-            document.location.replace('/');
+            
+            document.location.replace(`/${username}`);
         } else {
             alert('Failed to delete blog');
         }

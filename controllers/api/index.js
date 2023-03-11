@@ -81,7 +81,7 @@ router.post('/blogs', async (req, res) => {
             text_content: req.body.blogText,
             user_id: req.session.user_id
         });
-        if ( newBlog.title && newBlog.text_content && newBlog.user_id) {
+        if (newBlog.title && newBlog.text_content && newBlog.user_id) {
             res.status(201).json(newBlog);
         };
     } catch (err) {
@@ -138,7 +138,7 @@ router.delete('/:username/blogs/:id/comments/:comment_id', withAuth, async (req,
             }
         });
         if (!commentData) {
-            res.status(400).json({message: 'Not found!'});
+            res.status(400).json({ message: 'No comment found with this ID!' });
             return;
         }
         res.status(200).json(commentData);

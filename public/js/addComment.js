@@ -6,19 +6,18 @@ const saveNewComment = async (event) => {
     const blogId = document.querySelector('.blog-post').id;
     const bloggerName = document.querySelector('.user').id;
     const commentText = document.querySelector('#new-comment-text').value.trim();
-    const blogReaderId = document.querySelector('.comment-form').id;
+    const commenterID = document.querySelector('.comment-form').id;
     // checks user-provided values
-    if (commentText && blogReaderId) {
+    if (commentText && commenterID) {
         const response = await fetch(`/api/${bloggerName}/blogs/${blogId}/comments`, {
             method: 'POST',
-            body: JSON.stringify({ commentText, blogReaderId }),
+            body: JSON.stringify({ commentText, commenterID }),
             headers: { 'Content-Type': 'application/json' }
         });
-        console.log(response)
         if (response.ok) {
-            window.location.reload();
+            document.location.reload();
         } else {
-            alert('Failed to create new comment. Please try again.')
+            alert('Failed to create new comment. Please try again.');
         }
     }
 };

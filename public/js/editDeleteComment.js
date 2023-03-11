@@ -10,12 +10,16 @@ const deleteMyComment = async (event) => {
         const blogId = document.querySelector('.blog-post').id;
         const blogUsername = document.querySelector('.user').id;
         const commentId = document.querySelector('.comment-post').id;
+        console.log('blogId', blogId)
+        console.log('blogUsername', blogUsername)
+        console.log('commentId', commentId)
         const response = await fetch(`/api/${blogUsername}/blogs/${blogId}/comments/${commentId}`, {
             method: 'DELETE',
-            headers: { 'content-type': 'application/json'}
+            headers: { 'content-type': 'application/json' }
         });
+        console.log(response)
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace(`${blogUsername}/blogs/${blogId}`);
         } else {
             alert('Failed to delete comment');
         }

@@ -7,6 +7,32 @@ const userData = require('./userData.json');
 const blogData = require('./blogData.json');
 const commentData = require('./commentData.json');
 
+// seeds empty website
+const seedDatabase2 = async () => {
+  await userData.forEach(user => {
+    sequelize.sync({force: true});
+    const users = User.create(user, {
+      individualHooks: true,
+      returning: true
+    })
+  });
+  await blogData.forEach(blog => {
+    sequelize.sync({force: true});
+    const blogPost = Blog.create(blog, {
+      individualHooks: true,
+      returning: true
+    })
+  });
+  await commentData.forEach(comment => {
+    sequelize.sync({force: true});
+    const commentPost = Comment.create(comment, {
+      individualHooks: true,
+      returning: true
+    })
+  });
+}
+
+// seeds website with fake data
 const seedDatabase = async () => {
   // seeds users
   await sequelize.sync({ force: true });
@@ -36,4 +62,5 @@ const seedDatabase = async () => {
   process.exit(0);
 };
 
-seedDatabase();
+// seedDatabase();
+seedDatabase2();
