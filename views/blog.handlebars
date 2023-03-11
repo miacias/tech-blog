@@ -25,7 +25,7 @@
         <hr class="dotted">
         <div class="comment-post" id="{{user_id}}">
             <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
-            <span id="comment-date">on {{format_time date_created}}</span>
+            <span class="comment-date" id="{{id}}">on {{format_time date_created}}</span>
             <p id="comment-text">{{text_content}}</p>
             {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
