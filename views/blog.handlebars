@@ -39,7 +39,7 @@
     {{/if}}
     {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
-        <form class="comment-form" id="{{blogReader}}">
+        <form class="comment-form" id="{{userId}}">
             <div>
                 <label for="new-comment-text">Comment:</label>
                 <input class="new-comment" type="text" id="new-comment-text">
@@ -49,9 +49,14 @@
     </div>
     {{/if}}
 </section>
+{{!-- if the reader wrote this blog, they have the choice to edit or delete it --}}
 {{#if (blogMatch blogReader blogAuthor)}}
 <script src="/js/editDeleteBlog.js"></script>
+{{!-- if the reader did not write the blog, they have the choice to add a comment --}}
+{{else}}
+<script src="/js/addComment.js"></script>
 {{/if}}
+{{!-- if the reader wrote any of the comments on the page, they have the choice to edit or delete their comments --}}
 {{#if  (hasNoComments blog.comments.length blogReader blog.comments)}}
 <script src="/js/editDeleteComment.js"></script>
 {{/if}}

@@ -90,13 +90,33 @@ router.post('/blogs', async (req, res) => {
     }
 });
 
+// adds a comment to a specific blog
+router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
+    console.log('hello api comment add')
+    try {
+        const newComment = await Comment.create({
+            text_content: req.body.commentText, // comment text
+            user_id: req.session.user_id, // commenter ID
+            blog_id: req.params.id, // blog ID
+        });
+        console.log(newComment)
+        if (!newComment.text_content && newComment.user_id && newComment.where.blog_id) {
+            res.send(200).json(newComment)
+            // res.status(201).json(newComment)
+        };
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
 // deletes a blog
 router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.destroy({
             where: {
-                id: req.params.id,
-                user_id: req.session.user_id
+                id: req.params.id, // blog ID
+                user_id: req.session.user_id // username
             }
         });
         if (!blogData) {
