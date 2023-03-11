@@ -8,7 +8,7 @@ const saveNewComment = async (event) => {
     const commentText = document.querySelector('#new-comment-text').value.trim();
     const blogReaderId = document.querySelector('.comment-form').id;
     console.log(blogId, bloggerName, commentText, blogReaderId)
-    if (blogId && bloggerName && commentText && blogReaderId) {
+    if (commentText && blogReaderId) {
         const response = await fetch(`/api/${bloggerName}/blogs/${blogId}/comments`, {
             method: 'POST',
             body: JSON.stringify({ commentText, blogReaderId }),
@@ -22,4 +22,4 @@ const saveNewComment = async (event) => {
     }
 };
 
-addCommentBtn.addEventListener('submit', saveNewComment);
+addCommentBtn.addEventListener('click', saveNewComment);
