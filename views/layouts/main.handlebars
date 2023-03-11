@@ -9,7 +9,11 @@
 </head>
 <body>
     <header>
-        <h1>Welcome, Tiny Techie!</h1>
+        {{#if loggedIn}}
+        <h1>Welcome, {{blogReader}}</h1>
+        {{else}}
+        <h1>Welcome, Techie!</h1>
+        {{/if}}
         <p>Don't miss what's happening</p>
     </header>
     <nav>
