@@ -39,11 +39,11 @@
     {{/if}}
     {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
-        <form>
+        <form class="comment-form" id="{{blogReader}}">
             <div>
-                <label>Comment:</label>
-                <input class="new-comment" type="text">
-                <button class="btn" id="add-comment">Reply</button>
+                <label for="new-comment-text">Comment:</label>
+                <input class="new-comment" type="text" id="new-comment-text">
+                <button class="btn" type="submit" id="add-comment">Reply</button>
             </div>
         </form>
     </div>
