@@ -107,6 +107,21 @@ router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
     }
 });
 
+// edit a comment
+router.put('/:username/blogs/:id/comments/:comment_id', withAuth, async (res, req) => {
+    try {
+        const updatedComment = await Comment.update({
+            where: { id: req.params.comment_id }
+        });
+        if (!updatedComment) {
+            res.status(404).json({ message: 'Comment not found!' })
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
 // deletes a blog
 router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
     try {
@@ -117,7 +132,7 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
             }
         });
         if (!blogData) {
-            res.status(404).json({ message: 'Not found!' })
+            res.status(404).json({ message: 'Blog not found!' })
             return;
         }
         res.status(200).json(blogData);

@@ -2,9 +2,10 @@ const addCommentBtn = document.querySelector('#add-comment');
 
 const saveNewComment = async (event) => {
     event.preventDefault();
-    // collects values for URL params and data for database
+    // collects values for URL params
     const blogId = document.querySelector('.blog-post').id;
     const bloggerName = document.querySelector('.user').id;
+    // collects user-provided values
     const commentText = document.querySelector('#new-comment-text').value.trim();
     const commenterID = document.querySelector('.comment-form').id;
     // checks user-provided values

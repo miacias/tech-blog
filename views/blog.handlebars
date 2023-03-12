@@ -26,12 +26,12 @@
         <div class="comment-post" id="{{user_id}}">
             <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
             <span class="comment-date" id="{{id}}">on {{format_time date_created}}</span>
-            <p id="comment-text">{{text_content}}</p>
+            <p contenteditable="true" onChange="editMyComment()" id="comment-text">{{text_content}}</p>
             {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
             <div>
-                <button class="btn" id="edit-comment">Edit Comment</button>
-                <button class="btn" id="delete-comment">Delete Comment</button>
+                <button class="btn" id="edit-comment">Update</button>
+                <button class="btn" id="delete-comment">Delete</button>
             </div>
             {{/if}}
         </div>
@@ -41,15 +41,13 @@
         <p>Consider adding the first comment!</p>
     </div>
     {{/if}}
-    {{!-- if --}}
+    {{!-- if the reader didn't write this blog, they can add a comment --}}
     {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
         <form class="comment-form" id="{{userId}}">
             <div>
                 <label for="new-comment-text">Comment:</label>
                 <input class="new-comment" type="text" id="new-comment-text">
-            </div>
-            <div>
                 <button class="btn" type="submit" id="add-comment">Reply</button>
             </div>
         </form>

@@ -26,9 +26,43 @@ const deleteMyComment = async (event) => {
     }
 };
 
-const editMyComment = async () => {
-    console.log('hello edit')
+const editMyComment = async (event) => {
+    console.log('hello edit');
+    event.preventDefault();
+    event.stopPropagation();
+    // collects values from blog for URL params
+    const blogId = document.querySelector('.blog-post').id;
+    const bloggerName = document.querySelector('.user').id;
+    // collects user-provided values 
+    // make a loop over contenteditable.
+    //  previousSiblingElement.id gets the comment ID
+    const commentList = document.querySelector('.comments');
+    commentList.forEach(comment => {
+        let commentEdits = {
+            id: document.querySelector('.comment-date').id,
+            text_content: document.querySelector("[contenteditable]").textContent
+        };
+    });
+    // for (i = 0; i < commentList.length; i ++) {
 
+    // }
+    const commentEdits = {
+        id: document.querySelector('.comment-date').id,
+        text_content: document.querySelector("[contenteditable]").textContent
+    };
+    console.log(commentEdits)
+    if (commentEdits.id && commentEdits.text_content) {
+        const response = await fetch(`/api/${bloggerName}/blogs/${blogId}/comments/${commentEdits.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({}),
+            headers: { 'Content-Type': 'application/json'}
+        });
+        if (response.ok) {
+            document.location.reload();
+        } else {
+            alert('Failed to update edited comment. Please try again.');
+        }
+    }
 };
 
 deleteCommentBtn.addEventListener('click', deleteMyComment);
