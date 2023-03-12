@@ -25,6 +25,10 @@ N/A. [Deployed site here!](https://frozen-dawn-52591.herokuapp.com/)
 
 ## Usage
 
+The opening screen welcomes users to engage in the site by adding a post. After adding a new account and returning to the home page, enter the Dashboard to then add your first post. Other users on the site will be able to leave thoughts on your post. Return to the home page to see the list of blogs available for perusal. Select one by its title to read more.
+
+![Hazy blue tech blog website with blog listings](./public/assets/screencapture-tech-blog.png)
+
 
 ## Roadmap
 
@@ -88,7 +92,7 @@ Artist(s):
 
 
 ## License
-  
-MIT
+
+Please refer to the LICENSE in the repo:
 
 [![License](https://img.shields.io/badge/license-MIT-blue?logo=github)](https://github.com/miacias/tech-blog/blob/main/LICENSE)
