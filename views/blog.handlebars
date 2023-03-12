@@ -5,6 +5,7 @@
     <button class="btn" id="delete-blog">Delete</button>
 </section>
 {{/if}}
+
 {{!-- displays one full blog --}}
 <section class="blog-post" id="{{blog.id}}">
     <div class="blog-details">
@@ -14,17 +15,19 @@
         <p>{{blog.text_content}}</p>
     </div>
 </section>
+
 {{!-- displays all comments for this post --}}
 <section class="comments">
     <h4>Comments!</h4>
-    {{!-- {{log blog}} --}}
+    {{!-- if the post has comments, render them --}}
     {{#if blog.comments.length}}
         {{#each blog.comments}}
         <hr class="dotted">
         <div class="comment-post" id="{{user_id}}">
-            <span class="comment-username">By: {{user.username}}</span>
-            <span id="comment-date">on {{format_time date_created}}</span>
+            <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
+            <span class="comment-date" id="{{id}}">on {{format_time date_created}}</span>
             <p id="comment-text">{{text_content}}</p>
+            {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
             <div>
                 <button class="btn" id="edit-comment">Edit Comment</button>
@@ -38,18 +41,30 @@
         <p>Consider adding the first comment!</p>
     </div>
     {{/if}}
+    {{!-- if --}}
     {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
-        <form>
+        <form class="comment-form" id="{{userId}}">
             <div>
-                <label>Comment:</label>
-                <input class="new-comment" type="text">
-                <button class="btn" id="add-comment">Reply</button>
+                <label for="new-comment-text">Comment:</label>
+                <input class="new-comment" type="text" id="new-comment-text">
+            </div>
+            <div>
+                <button class="btn" type="submit" id="add-comment">Reply</button>
             </div>
         </form>
     </div>
     {{/if}}
 </section>
-{{#if  (hasNoComments blog.comments.length blogReader blog.comments)}}
-<script src="/js/editDelete.js"></script>
+
+{{!-- if the reader wrote this blog, they have the choice to edit or delete it --}}
+{{#if (blogMatch blogReader blogAuthor)}}
+<script src="/js/editDeleteBlog.js"></script>
+{{!-- if the reader did not write the blog, they have the choice to add a comment --}}
+{{else}}
+<script src="/js/addComment.js"></script>
+{{/if}}
+{{!-- if the reader wrote any of the comments on the page, they have the choice to edit or delete their own comments --}}
+{{#if (hasNoComments blog.comments.length blogReader blog.comments)}}
+<script src="/js/editDeleteComment.js"></script>
 {{/if}}

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Blog, Login } = require('../../models');
+const { User, Blog, Comment, Login } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
 // authenticate user login to store in session
@@ -81,8 +81,25 @@ router.post('/blogs', async (req, res) => {
             text_content: req.body.blogText,
             user_id: req.session.user_id
         });
-        if ( newBlog.title && newBlog.text_content && newBlog.user_id) {
+        if (newBlog.title && newBlog.text_content && newBlog.user_id) {
             res.status(201).json(newBlog);
+        };
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
+// adds a comment to a specific blog
+router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
+    try {
+        const newComment = await Comment.create({
+            text_content: req.body.commentText, // comment text
+            user_id: req.session.user_id, // commenter ID
+            blog_id: req.params.id, // blog ID
+        });
+        if (!newComment.text_content && newComment.user_id && newComment.where.blog_id) {
+            res.status(201).json(newComment);
         };
     } catch (err) {
         console.error(err);
@@ -95,8 +112,8 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.destroy({
             where: {
-                id: req.params.id,
-                user_id: req.session.user_id
+                id: req.params.id, // blog ID
+                user_id: req.session.user_id // username
             }
         });
         if (!blogData) {
@@ -104,6 +121,26 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
             return;
         }
         res.status(200).json(blogData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
+// deletes a comment
+router.delete('/:username/blogs/:id/comments/:comment_id', withAuth, async (req, res) => {
+    try {
+        const commentData = await Comment.destroy({
+            where: {
+                blog_id: req.params.id, // blog ID
+                user_id: req.session.user_id // commenter ID
+            }
+        });
+        if (!commentData) {
+            res.status(400).json({ message: 'No comment found with this ID!' });
+            return;
+        }
+        res.status(200).json(commentData);
     } catch (err) {
         console.error(err);
         res.status(500).json(err);

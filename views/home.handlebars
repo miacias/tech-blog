@@ -1,5 +1,11 @@
 <section>
+    {{!-- Shows all posts OR asks for user to add first post --}}
+    {{#if loggedIn}}
+    <h2>We need more users like YOU to add posts!</h2>
+    <p>Open your Dashboard to compose your first post!</p>
+    {{else}}
     <h2>Top Posts</h2>
+    {{/if}}
     <div>
         {{!-- each blog title links to a user's blog by ID --}}
         {{#each home}}

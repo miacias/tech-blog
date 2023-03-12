@@ -9,12 +9,12 @@
 </head>
 <body>
     <header>
+        <h1>Can Has Tech?</h1>
         {{#if loggedIn}}
-        <h1>Welcome, {{blogReader}}</h1>
+        <p class="welcome" id="custom-welcome"><span>Welcome, </span><span style="color: wheat">{{blogReader}}</span><span>! Don't miss what's happening.</span></p>
         {{else}}
-        <h1>Welcome, Techie!</h1>
+        <p class="welcome" id="standard-welcome">Welcome, Techie! Don't miss what's happening.</p>
         {{/if}}
-        <p>Don't miss what's happening</p>
     </header>
     <nav>
         <button class="btn"><a href="/">Home</a></button>
