@@ -9,7 +9,7 @@ const deleteMyComment = async (event) => {
     if (areYouSure) {
         const blogId = document.querySelector('.blog-post').id; 
         const bloggerUsername = document.querySelector('.user').id;
-        const commenterId = document.querySelector('.comment-post').id;
+        // const commenterId = document.querySelector('.comment-post').id;
         const commentId = document.querySelector('.comment-date').id;
         console.log('commentId', commentId) // getting ID of commenter instead of comment by mistake
         const response = await fetch(`/api/${bloggerUsername}/blogs/${blogId}/comments/${commentId}`, {

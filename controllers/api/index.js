@@ -130,11 +130,11 @@ router.delete('/:username/blogs/:id', withAuth, async (req, res) => {
 // deletes a comment
 router.delete('/:username/blogs/:id/comments/:comment_id', withAuth, async (req, res) => {
     try {
+        console.log(req.session.user_id)
         const commentData = await Comment.destroy({
             where: {
-                user_id: req.session.user_id,
-                blog_id: req.params.id,
-                id: req.params.id
+                blog_id: req.params.id, // blog ID
+                user_id: req.session.user_id // commenter ID
             }
         });
         if (!commentData) {
