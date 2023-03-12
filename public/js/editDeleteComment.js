@@ -7,20 +7,21 @@ const deleteMyComment = async (event) => {
     // verifies user wants to delete
     const areYouSure = confirm('Are you sure you want to delete this comment?');
     if (areYouSure) {
-        const blogId = document.querySelector('.blog-post').id; 
+        // collects values for URL params and data for database
+        const blogId = document.querySelector('.blog-post').id;
         const bloggerUsername = document.querySelector('.user').id;
-        // const commenterId = document.querySelector('.comment-post').id;
         const commentId = document.querySelector('.comment-date').id;
-        console.log('commentId', commentId) // getting ID of commenter instead of comment by mistake
-        const response = await fetch(`/api/${bloggerUsername}/blogs/${blogId}/comments/${commentId}`, {
-            method: 'DELETE',
-            headers: { 'content-type': 'application/json' }
-        });
-        console.log(response)
-        if (response.ok) {
-            document.location.reload();
-        } else {
-            alert('Failed to delete comment');
+        // checks provided values
+        if (blogId && bloggerUsername && commentId) {
+            const response = await fetch(`/api/${bloggerUsername}/blogs/${blogId}/comments/${commentId}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' }
+            });
+            if (response.ok) {
+                document.location.reload();
+            } else {
+                alert('Failed to delete comment');
+            }
         }
     }
 };
