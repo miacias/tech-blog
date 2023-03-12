@@ -62,5 +62,5 @@ const seedDatabase = async () => {
   process.exit(0);
 };
 
-// seedDatabase();
-seedDatabase2();
+seedDatabase();
+// seedDatabase2();

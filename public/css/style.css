@@ -26,6 +26,15 @@ h1 {
     font-size: xx-large;
 }
 
+h2 {
+    font-size: large;
+    padding: 1%;
+}
+
+h3 {
+    font-size: medium;
+}
+
 nav {
     background-color: var(--blue-jay);
     /* text-align: center; */
