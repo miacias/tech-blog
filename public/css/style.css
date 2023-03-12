@@ -18,18 +18,27 @@ footer {
     text-align: center;
     background-color: var(--class-one-blue);
     color: var(--vinyl-floor);
+    padding: 2%;
+
+}
+
+h1 {
+    font-size: xx-large;
 }
 
 nav {
     background-color: var(--blue-jay);
+    /* text-align: center; */
+    padding: 2%;
 }
 
-.btn {
+nav .btn {
     background-color: wheat;
     color: var(--sky-mountain);
     border: 0;
     border-radius: 10%;
     cursor: pointer;
+    padding: 1%;
 }
 
 a:link {
@@ -53,4 +62,8 @@ p {
 
 hr {
     border: 1px dashed #bbb;
+}
+
+.blogs, h3 {
+    padding: 2%;
 }
