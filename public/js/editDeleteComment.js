@@ -36,6 +36,17 @@ const editMyComment = async (event) => {
     // collects user-provided values 
     // make a loop over contenteditable.
     //  previousSiblingElement.id gets the comment ID
+    /* 
+    
+    
+    DAN GROSS SAYS, "Attach the event listener to a parent of the things in the #each"
+    - any event from a child will bubble up to the parent
+    - You can then access the element by something dynamic. 
+    - If it's coming back from your database, you could maybe add an id based on the database ID as an example
+    
+    
+    
+    */
     const commentList = document.querySelector('.comments');
     commentList.forEach(comment => {
         let commentEdits = {
