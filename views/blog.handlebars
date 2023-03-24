@@ -57,12 +57,12 @@
 
 {{!-- if the reader wrote this blog, they have the choice to edit or delete it --}}
 {{#if (blogMatch blogReader blogAuthor)}}
-<script src="/js/editDeleteBlog.js"></script>
+<script src="/assets/js/editDeleteBlog.js"></script>
 {{!-- if the reader did not write the blog, they have the choice to add a comment --}}
 {{else}}
-<script src="/js/addComment.js"></script>
+<script src="/assets/js/addComment.js"></script>
 {{/if}}
 {{!-- if the reader wrote any of the comments on the page, they have the choice to edit or delete their own comments --}}
 {{#if (hasNoComments blog.comments.length blogReader blog.comments)}}
-<script src="/js/editDeleteComment.js"></script>
+<script src="/assets/js/editDeleteComment.js"></script>
 {{/if}}

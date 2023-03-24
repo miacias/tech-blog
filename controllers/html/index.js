@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     };
-    res.render('login');
+    return res.render('login');
 });
 
 // get home page with all blog posts
@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
         const home = allBlogs.map((blog) => {
             return blog.get({ plain: true });
         });
-        res.render('home', {
+        return res.render('home', {
             home,
             loggedIn: req.session.logged_in,
             userId: req.session.user_id,
@@ -63,7 +63,7 @@ router.get('/:username', withAuth, async (req, res) => {
         };
         // res.send(oneUser) // to test via Insomnia before Views are built
         const dashboard = oneUser.get({ plain: true }); // converts data to JavaScript object
-        res.render('dashboard', {
+        return res.render('dashboard', {
             dashboard,
             loggedIn: req.session.logged_in, // sends session status (true/false)
             userId: req.session.user_id,
@@ -108,7 +108,7 @@ router.get('/:username/blogs/:id', withAuth, async (req, res) => {
         };
         // res.send(oneBlog); // to test via Insomnia before Views are built
         const blog = oneBlog.get({ plain: true }); // converts data to JavaScript object
-        res.render('blog', {
+        return res.render('blog', {
             blog,
             blogAuthor: blog.user.username,
             loggedIn: req.session.logged_in, // sends session status (true/false)
