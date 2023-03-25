@@ -45,6 +45,7 @@ const editMyComment = async (event) => {
         id: document.querySelector('.comment-id').id,
         text_content: document.querySelector("[contenteditable]").textContent
     };
+    console.log(commentEdits)
     if (commentEdits.id && commentEdits.text_content) {
         const response = await fetch(`/api/${bloggerName}/blogs/${blogId}/comments/${commentEdits.id}`, {
             method: 'PUT',
@@ -54,7 +55,7 @@ const editMyComment = async (event) => {
         if (response.ok) {
             document.location.reload();
         } else {
-            alert('Failed to update edited comment. Please try again.');
+            alert('Failed to update comment. Please try again.');
         }
     }
 };

@@ -40,16 +40,18 @@ router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
     }
 });
 
-// edit a comment
-router.put('/:username/blogs/:id/comments/:comment_id', withAuth, async (res, req) => {
-    console.log('body', req.body) // undefined
-    console.log("params", req.params) // undefined
+// edit a comment by ID
+router.put('/:username/blogs/:id/comments/:comment_id', withAuth, async (req, res) => {
     try {
         const updatedComment = await Comment.update({
-            where: { id: req.params.comment_id },
-            text_content: req.body.commentText, // comment text
+            text_content: req.body.commentEdits.text_content, // comment text
             user_id: req.session.user_id, // commenter ID
-            blog_id: req.params.id, // blog ID
+            blog_id: req.params.id, // blog ID 
+        },
+        {
+            where: {
+                id: req.body.commentEdits.id, // comment ID
+            }
         });
         if (!updatedComment) {
             return res.status(404).json({ message: 'Comment not found!' })
