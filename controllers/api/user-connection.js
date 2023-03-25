@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Blog, Comment, Login } = require('../../models');
+const { User, Login } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
 // authenticate user login to store in session

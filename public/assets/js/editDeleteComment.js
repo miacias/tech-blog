@@ -1,6 +1,8 @@
 // manage comments
-const deleteCommentBtn = document.querySelector('#delete-comment');
-const editCommentBtn = document.querySelector('#edit-comment');
+// const deleteCommentBtn = document.querySelector('#delete-comment');
+const editCommentBtn = document.querySelector('.edit-comment');
+// const editCommentBtn = document.querySelectorAll('[class=edit-comment]');
+// const deleteCommentBtn = document.querySelectorAll('[class=delete-comment]');
 
 const deleteMyComment = async (event) => {
     event.preventDefault();
@@ -26,35 +28,27 @@ const deleteMyComment = async (event) => {
     }
 };
 
+// allows readers to edit their own comments
+// const editComment = async (event) => {
+//     event.preventDefault();
+//     const commentId = event.currentTarget.querySelector('.comment-text').id;
+//     console.log(commentId);
+// };
+
 const editMyComment = async (event) => {
     console.log('hello edit');
     event.preventDefault();
-    event.stopPropagation();
     // collects values from blog for URL params
     const blogId = document.querySelector('.blog-post').id;
     const bloggerName = document.querySelector('.user').id;
-    // collects user-provided values 
-    // make a loop over contenteditable.
-    //  previousSiblingElement.id gets the comment ID
-    const commentList = document.querySelector('.comments');
-    commentList.forEach(comment => {
-        let commentEdits = {
-            id: document.querySelector('.comment-date').id,
-            text_content: document.querySelector("[contenteditable]").textContent
-        };
-    });
-    // for (i = 0; i < commentList.length; i ++) {
-
-    // }
     const commentEdits = {
-        id: document.querySelector('.comment-date').id,
+        id: document.querySelector('.comment-id').id,
         text_content: document.querySelector("[contenteditable]").textContent
     };
-    console.log(commentEdits)
     if (commentEdits.id && commentEdits.text_content) {
         const response = await fetch(`/api/${bloggerName}/blogs/${blogId}/comments/${commentEdits.id}`, {
             method: 'PUT',
-            body: JSON.stringify({}),
+            body: JSON.stringify({commentEdits}),
             headers: { 'Content-Type': 'application/json'}
         });
         if (response.ok) {
@@ -65,5 +59,7 @@ const editMyComment = async (event) => {
     }
 };
 
-deleteCommentBtn.addEventListener('click', deleteMyComment);
+// deleteCommentBtn.addEventListener('click', deleteMyComment);
 editCommentBtn.addEventListener('click', editMyComment);
+
+// editCommentBtn.forEach(btn => btn.addEventListener('click', editMyComment));

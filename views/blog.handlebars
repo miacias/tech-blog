@@ -23,15 +23,15 @@
     {{#if blog.comments.length}}
         {{#each blog.comments}}
         <hr class="dotted">
-        <div class="comment-post" id="{{user_id}}">
+        <div class="comment-post comment-user-id" id="{{user_id}}">
             <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
             <span class="comment-date" id="{{id}}">on {{format_time date_created}}</span>
             <p contenteditable="true" onChange="editMyComment()" id="comment-text">{{text_content}}</p>
             {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
             <div>
-                <button class="btn" id="edit-comment">Update</button>
-                <button class="btn" id="delete-comment">Delete</button>
+                <button class="btn edit-comment comment-id" id="{{id}}">Update</button>
+                <button class="btn delete-comment comment-id" id="{{id}}">Delete</button>
             </div>
             {{/if}}
         </div>

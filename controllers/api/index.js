@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const userRoutes = require('./connection.js');
-const { User, Blog, Comment, Login } = require('../../models');
+const userRoutes = require('./user-connection.js');
+const { User, Blog, Comment } = require('../../models');
 const withAuth = require('../../utils/auth.js');
 
+// handles sign up, sign out, log in
 router.use('/users', userRoutes);
 
 // creates a new blog
@@ -41,13 +42,19 @@ router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
 
 // edit a comment
 router.put('/:username/blogs/:id/comments/:comment_id', withAuth, async (res, req) => {
+    console.log('body', req.body) // undefined
+    console.log("params", req.params) // undefined
     try {
         const updatedComment = await Comment.update({
-            where: { id: req.params.comment_id }
+            where: { id: req.params.comment_id },
+            text_content: req.body.commentText, // comment text
+            user_id: req.session.user_id, // commenter ID
+            blog_id: req.params.id, // blog ID
         });
         if (!updatedComment) {
-            res.status(404).json({ message: 'Comment not found!' })
+            return res.status(404).json({ message: 'Comment not found!' })
         }
+        return res.status(200).json(updatedComment);
     } catch (err) {
         console.error(err);
         res.status(500).json(err);

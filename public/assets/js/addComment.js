@@ -1,5 +1,7 @@
 const addCommentBtn = document.querySelector('#add-comment');
 
+
+// allows readers to add comments to a blog
 const saveNewComment = async (event) => {
     event.preventDefault();
     // collects values for URL params
@@ -16,11 +18,13 @@ const saveNewComment = async (event) => {
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-            document.location.reload();
+            // refreshes page to show updated values
+            location.reload();
         } else {
             alert('Failed to create new comment. Please try again.');
         }
     }
 };
+
 
 addCommentBtn.addEventListener('click', saveNewComment);
