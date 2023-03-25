@@ -1,10 +1,8 @@
 // manage comments
-// const deleteCommentBtn = document.querySelector('#delete-comment');
-// const editCommentBtn = document.querySelectorAll('[class=edit-comment]');
-// console.log(editCommentBtn)
-// const editCommentBtn = document.querySelectorAll('[class=edit-comment]');
-// const deleteCommentBtn = document.querySelectorAll('[class=delete-comment]');
+const deleteCommentBtn = document.querySelectorAll('.delete-comment');
+const editCommentBtn = document.querySelectorAll('.edit-comment');
 
+// allows readers to delete their own comments
 const deleteMyComment = async (event) => {
     event.preventDefault();
     // verifies user wants to delete
@@ -30,17 +28,13 @@ const deleteMyComment = async (event) => {
 };
 
 // allows readers to edit their own comments
-// const editComment = async (event) => {
-//     event.preventDefault();
-//     const commentId = event.currentTarget.querySelector('.comment-text').id;
-//     console.log(commentId);
-// };
-
 const editMyComment = async (event) => {
-    console.log('hello edit');
+    console.log('hello edit')
     event.preventDefault();
     // collects values from blog for URL params
     const blogId = document.querySelector('.blog-post').id;
+
+    console.log(blogId)
     const bloggerName = document.querySelector('.user').id;
     const commentEdits = {
         id: document.querySelector('.comment-id').id,
@@ -64,4 +58,4 @@ const editMyComment = async (event) => {
 // deleteCommentBtn.addEventListener('click', deleteMyComment);
 // editCommentBtn.addEventListener('click', editMyComment);
 
-// editCommentBtn.forEach(btn => btn.addEventListener('click', editMyComment));
+editCommentBtn.forEach(btn => btn.addEventListener('click', editMyComment));
