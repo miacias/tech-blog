@@ -1,7 +1,7 @@
 {{!-- displays edit/delete when username matches page author --}}
 {{#if (blogMatch blogReader blogAuthor)}}
 <section>
-    <button class="btn" id="edit-blog">Edit</button>
+    <button class="btn" id="edit-blog">Update</button>
     <button class="btn" id="delete-blog">Delete</button>
 </section>
 {{/if}}
@@ -12,7 +12,11 @@
         <h3>{{blog.title}}</h3>
         <p class="user" id="{{blog.user.username}}">By: {{blog.user.username}}</p>
         <p>{{format_time blog.date_created}}</p>
-        <p>{{blog.text_content}}</p>
+        {{#if (blogMatch blogReader blogAuthor)}}
+        <p contenteditable="true">{{blog.text_content}}</p>
+        {{else}}
+         <p contenteditable="false">{{blog.text_content}}</p>
+        {{/if}}       
     </div>
 </section>
 
@@ -37,9 +41,16 @@
         </div>
         {{/each}}
     {{else}}
+        {{!-- readers other than the blog author are invited to add a first comment if none are present --}}
+        {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
         <p>Consider adding the first comment!</p>
     </div>
+        {{else}}
+    <div>
+        <p>Check back later for new comments!</p>
+    </div>
+        {{/if}}
     {{/if}}
     {{!-- if the reader didn't write this blog, they can add a comment --}}
     {{#if (addCommentMatch blogReader blogAuthor)}}

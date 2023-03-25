@@ -32,7 +32,7 @@ const deleteMyComment = async (event) => {
 const editMyComment = async (event) => {
     event.preventDefault();
     // verifies user is satisfied with edits
-    const areYouSure = confirm('Are you ready to update this comment?');
+    const areYouSure = confirm('Are you satisfied with your edits to this comment?');
     if (!areYouSure) {
         return;
     }
