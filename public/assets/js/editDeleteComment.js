@@ -1,6 +1,7 @@
 // manage comments
 // const deleteCommentBtn = document.querySelector('#delete-comment');
-const editCommentBtn = document.querySelector('.edit-comment');
+// const editCommentBtn = document.querySelectorAll('[class=edit-comment]');
+// console.log(editCommentBtn)
 // const editCommentBtn = document.querySelectorAll('[class=edit-comment]');
 // const deleteCommentBtn = document.querySelectorAll('[class=delete-comment]');
 
@@ -61,6 +62,6 @@ const editMyComment = async (event) => {
 };
 
 // deleteCommentBtn.addEventListener('click', deleteMyComment);
-editCommentBtn.addEventListener('click', editMyComment);
+// editCommentBtn.addEventListener('click', editMyComment);
 
 // editCommentBtn.forEach(btn => btn.addEventListener('click', editMyComment));

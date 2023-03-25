@@ -31,9 +31,11 @@ router.post('/:username/blogs/:id/comments', withAuth, async (req, res) => {
             user_id: req.session.user_id, // commenter ID
             blog_id: req.params.id, // blog ID
         });
-        if (!newComment.text_content && newComment.user_id && newComment.where.blog_id) {
+        if (newComment.text_content && newComment.user_id && newComment.blog_id) {
             res.status(201).json(newComment);
-        };
+        } else {
+            res.status(400).json({message: 'unable to add comment'});
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json(err);

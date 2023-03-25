@@ -19,7 +19,7 @@ const saveNewComment = async (event) => {
         });
         if (response.ok) {
             // refreshes page to show updated values
-            location.reload();
+            document.location.reload();
         } else {
             alert('Failed to create new comment. Please try again.');
         }
