@@ -90,8 +90,7 @@ router.delete('/:username/blogs/:id/comments/:comment_id', withAuth, async (req,
     try {
         const commentData = await Comment.destroy({
             where: {
-                blog_id: req.params.id, // blog ID
-                user_id: req.session.user_id // commenter ID
+                id: req.params.comment_id // comment ID
             }
         });
         if (!commentData) {

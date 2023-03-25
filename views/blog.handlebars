@@ -30,7 +30,7 @@
             {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
             <div>
-                <button class="btn edit-comment comment-id" id="{{id}}">Update</button>
+                <button class="btn edit-comment comment-id" id="{{id}}">Edit</button>
                 <button class="btn delete-comment comment-id" id="{{id}}">Delete</button>
             </div>
             {{/if}}
