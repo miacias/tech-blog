@@ -1,10 +1,12 @@
 # Tech Blog
 
-model-view-controller blog site for publishing and commenting on posts
+model-view-controller forum site for publishing and commenting on blog posts
 
 ## Description
 
-This is a complete blog site for any and all tech related thoughts and aspirations. This was a very challenging project in one week!
+This is a complete blog site for any and all tech related thoughts and aspirations. One of the main functions of the web is to connect humans of the world to resources, knowledge, and social circles that may otherwise be physically inaccessible due to distance. This blog site offers tech gurus to share their wealth of knowledge, for developers to discuss their discoveries, and for those interested in technology to find inspiration and hopefully an entry point into the world of tech.
+
+This project was a rush to complete all components in one week! It was valuable to practice front-to-back connections via fetch requests and database queries. As an introduction to the Model-View-Controller format, it is clear that each element plays an important role, and without it, a website or web app would not be able to serve anything more than a surface-level purpose.
 
 
 ## Table of Contents
@@ -20,7 +22,7 @@ This is a complete blog site for any and all tech related thoughts and aspiratio
 
 ## Installation
 
-N/A. [Deployed site here!](https://frozen-dawn-52591.herokuapp.com/)
+N/A. [Deployed site here!](https://quiet-woodland-50300.herokuapp.com/)
 
 
 ## Usage
@@ -33,9 +35,6 @@ The opening screen welcomes users to engage in the site by adding a post. After 
 ## Roadmap
 
 Content will be added and adjusted as new coding projects are available! Some projects may phase out over time as my work becomes more specialized. Some desired features and functionality to be added in the future:
-- editing features: for blog writers and commenters
-- instant page load: show new content as it is added or changed without needing to manually refresh the page
-- server session cookies that are handled by the code and not stored in the browser; the app currently works best in Incognito Mode for this reason
 - ensure mobile-friendly responsive view using Bootstrap classes and breakpoints
 
 
@@ -61,9 +60,10 @@ Documentation referenced:
 
 - Mozilla Developer Network (MDN)
 - Stack Overflow Forums
-- MySQL2 node package
-- Sequelize node package
+- W3 Schools
+- Sequelize
 - Heroku
+- JAWSDB
 
 Tools used:
 
