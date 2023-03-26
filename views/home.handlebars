@@ -1,4 +1,4 @@
-<section>
+<section class="blog-home">
     {{!-- Shows all posts OR asks for user to add first post --}}
     {{#if loggedIn}}
     <h2>We need more users like YOU to add posts!</h2>
@@ -6,15 +6,15 @@
     {{else}}
     <h2>Top Posts</h2>
     {{/if}}
+    {{!-- each blog title links to a user's blog by ID --}}
+    {{#each home}}
     <div class="blogs">
-        {{!-- each blog title links to a user's blog by ID --}}
-        {{#each home}}
         <hr class="dotted">
         <a href="{{user.username}}/blogs/{{id}}"> 
             <h3>{{title}}</h2>
         </a>
         <span>{{user.username}}</span>
-        <span>posted on {{format_time date_created}}</span>
-        {{/each}}
+        <span class="date">posted on {{format_time date_created}}</span>
     </div>
+    {{/each}}
 </section>
