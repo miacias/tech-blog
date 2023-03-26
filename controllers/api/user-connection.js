@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User, Login } = require('../../models');
-const withAuth = require('../../utils/auth.js');
 
 // authenticate user login to store in session
 router.post('/login', async (req, res) => {
@@ -67,9 +66,9 @@ router.post('/logout', (req, res) => {
         req.session.destroy(() => {
             res.status(204).end();
         });
-        res.redirect('/');
+        return res.redirect('/');
     } else {
-        res.status(404).end();
+        return res.status(404).end();
     }
 });
 

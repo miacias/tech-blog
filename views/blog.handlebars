@@ -1,17 +1,9 @@
-{{!-- displays edit/delete when username matches page author --}}
-{{#if (blogMatch blogReader blogAuthor)}}
-<section>
-    <button class="btn" id="edit-blog">Update</button>
-    <button class="btn" id="delete-blog">Delete</button>
-</section>
-{{/if}}
-
 {{!-- displays one full blog --}}
 <section class="blog-post" id="{{blog.id}}">
     <div class="blog-details">
         <h3>{{blog.title}}</h3>
-        <p class="user" id="{{blog.user.username}}">By: {{blog.user.username}}</p>
-        <p>{{format_time blog.date_created}}</p>
+        <span class="user" id="{{blog.user.username}}">By: {{blog.user.username}}</span>
+        <span>{{format_time blog.date_created}}</span>
         {{#if (blogMatch blogReader blogAuthor)}}
         <p contenteditable="true">{{blog.text_content}}</p>
         {{else}}
@@ -19,6 +11,14 @@
         {{/if}}       
     </div>
 </section>
+
+{{!-- displays edit/delete blog options for page author --}}
+{{#if (blogMatch blogReader blogAuthor)}}
+<section class='buttons'>
+    <button class="btn" id="edit-blog">Save Changes</button>
+    <button class="btn" id="delete-blog">Delete Blog</button>
+</section>
+{{/if}}
 
 {{!-- displays all comments for this post --}}
 <section class="comments">
@@ -28,14 +28,14 @@
         {{#each blog.comments}}
         <hr class="dotted">
         <div class="comment-post comment-user-id" id="{{user_id}}">
+            <p contenteditable="true" onChange="editMyComment()" id="comment-text">{{text_content}}</p>
             <span class="comment-username" id="{{user.username}}">By: {{user.username}}</span>
             <span class="comment-date" id="{{id}}">on {{format_time date_created}}</span>
-            <p contenteditable="true" onChange="editMyComment()" id="comment-text">{{text_content}}</p>
             {{!-- if the reader wrote THIS comment, allow edit/delete --}}
             {{#if (commentMatch ../blogReader user.username)}}
-            <div>
-                <button class="btn edit-comment comment-id" id="{{id}}">Edit</button>
-                <button class="btn delete-comment comment-id" id="{{id}}">Delete</button>
+            <div class="buttons">
+                <button class="btn edit-comment comment-id" id="{{id}}">Save Changes</button>
+                <button class="btn delete-comment comment-id" id="{{id}}">Delete Comment</button>
             </div>
             {{/if}}
         </div>
@@ -52,13 +52,15 @@
     </div>
         {{/if}}
     {{/if}}
+</section>
+<section class="add-comment">
     {{!-- if the reader didn't write this blog, they can add a comment --}}
     {{#if (addCommentMatch blogReader blogAuthor)}}
     <div>
         <form class="comment-form" id="{{userId}}">
             <div>
-                <label for="new-comment-text">Comment:</label>
-                <input class="new-comment" type="text" id="new-comment-text">
+                <label for="new-comment-text">Add Comment:</label>
+                <textarea class="new-comment" type="text" id="new-comment-text"></textarea>
                 <button class="btn" type="submit" id="add-comment">Reply</button>
             </div>
         </form>
