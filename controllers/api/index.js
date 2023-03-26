@@ -7,7 +7,7 @@ const withAuth = require('../../utils/auth.js');
 router.use('/users', userRoutes);
 
 // creates a new blog
-router.post('/blogs', async (req, res) => {
+router.post('/blogs', withAuth, async (req, res) => {
     try {
         const newBlog = await Blog.create({
             title: req.body.blogTitle,
